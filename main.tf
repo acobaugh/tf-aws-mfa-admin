@@ -5,6 +5,22 @@
  * necessary to enforce MFA usage. Users added to the admin group are allowed
  * to update their MFA devices, as well as rotate their own access keys via
  * API.
+ *
+ * ## Example usage
+ * ```
+ * resource "aws_iam_user" "bob" {
+ *   name          = "bob"
+ *   force_destroy = true
+ * }
+ * 
+ * module "terraform-admin" {
+ *   source     = "git::ssh://git@git.psu.edu/eio-tf-modules/aws-iam-mfa-admin.git"
+ *   role_name  = "admin"
+ *   group_name = "admin-users"
+ *   users      = ["bob"]
+ * }
+ * ```
+ *
  */
 
 data "aws_caller_identity" "current" {}
